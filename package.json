@@ -1,6 +1,6 @@
 {
   "name": "util.taskify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "util.promisify but for Tasks !",
   "main": "index.js",
   "repository": "https://github.com/YannickDot/Taskify.git",
