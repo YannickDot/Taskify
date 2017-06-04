@@ -32,7 +32,7 @@ const Task = require('taskorama')
 
 const readFileTask = taskify(fs.readFile,Task)
 
-readFileTask('package.json')
+readFileTask('package.json', 'utf8')
   .fork(
     err => console.error('Failed.', err),
     str => console.log('Done!', str)
@@ -50,7 +50,7 @@ const Task = require('taskorama')
 
 const Filesystem = taskify(fs,Task)
 
-Filesystem.readFile('package.json')
+Filesystem.readFile('package.json', 'utf8')
   .fork(
     err => console.error('Failed.', err),
     str => console.log('Done!', str)
