@@ -21,7 +21,7 @@ I suggest you to try [`Fluture`](https://github.com/fluture-js/Fluture) or [`Tas
 ## Usage
 
 
-For a single function : 
+For a single function :
 
 ```js
 const taskify = require('util.taskify')
@@ -30,7 +30,7 @@ const Task = require('taskorama')
 // or
 // const Task = require('fluture')
 
-const readFileTask = taskify(fs.readFile,Task)
+const readFileTask = taskify(Task, fs.readFile)
 
 readFileTask('package.json', 'utf8')
   .fork(
@@ -39,7 +39,7 @@ readFileTask('package.json', 'utf8')
   )
 ```
 
-Or for a whole module : 
+Or for a whole module :
 
 ```js
 const taskify = require('util.taskify')
@@ -48,9 +48,35 @@ const Task = require('taskorama')
 // or
 // const Task = require('fluture')
 
-const Filesystem = taskify(fs,Task)
+const Filesystem = taskify(Task, fs)
 
 Filesystem.readFile('package.json', 'utf8')
+  .fork(
+    err => console.error('Failed.', err),
+    str => console.log('Done!', str)
+  )
+```
+
+#### BONUS
+
+If you like currying (using ramda `curry()` function) :
+
+
+```js
+const { curry } = require('ramda')
+const util_taskify = require('util.taskify')
+const fs = require('fs')
+const Task = require('taskorama')
+// or
+// const Task = require('fluture')
+//
+
+const taskify = curry(util_taskify)
+const taskifier = taskify(Task)
+
+const readFileTask = taskifier(fs.readFile)
+
+readFileTask('package.json')
   .fork(
     err => console.error('Failed.', err),
     str => console.log('Done!', str)

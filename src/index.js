@@ -7,7 +7,7 @@ const wrapFn = (fn, task) => {
   }
 }
 
-export default function taskify(arg, task, options) {
+export default function taskify(task, arg, options) {
   if (!task)
     throw Error('Please pass a Task data type as second argument of taskify.')
   if (typeof arg === 'function') {
